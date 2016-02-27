@@ -1,0 +1,4 @@
+2,260498154,RandomHusPlayer,1,RandomHusPlayer,59,game00002.log,
+3,RandomHusPlayer,260498154,0,RandomHusPlayer,139,game00003.log,
+4,Human,RandomHusPlayer,0,Human,45,game00004.log,
+15,Human,260498154,0,Human,26,game00015.log,
