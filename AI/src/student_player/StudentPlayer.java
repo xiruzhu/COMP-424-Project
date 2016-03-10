@@ -50,18 +50,18 @@ public class StudentPlayer extends HusPlayer {
     		max += moves[i].prob;
     	}
     	*/
-    	moves[0].prob = 50;
     	for(int i = 0; i < moves.length - 1; i++){
-    		if(moves[i].value == moves[i+1].value){
-    			moves[i+1].prob = 50;
+    		if(moves[i].value == moves[0].value){
+    			moves[i].prob = 1000;
     		}else
-    			moves[i+1].prob = 1;
+    			moves[i].prob = 1;
+    		max += moves[i].prob;
     	}
     	ret = max;
     	for(int i = 0; i < moves.length; i++){
     		max -= moves[i].prob;
     		moves[i].overall_prob = max;
-    		System.out.println(moves[i].prob + " " + moves[i].value);
+    		System.out.println(moves[i].overall_prob + " " + moves[i].value + " " + ret);
     	}
     	return ret;
     }
