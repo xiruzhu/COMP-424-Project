@@ -52,7 +52,7 @@ public class StudentPlayer extends HusPlayer {
     	*/
     	for(int i = 0; i < moves.length - 1; i++){
     		if(moves[i].value == moves[0].value){
-    			moves[i].prob = 1000;
+    			moves[i].prob = 500;
     		}else
     			moves[i].prob = 1;
     		max += moves[i].prob;
