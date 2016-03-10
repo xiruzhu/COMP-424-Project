@@ -1,0 +1,15 @@
+# Server version 0.08 running on Siegetank:8123
+# Game ID: 144
+# Board class: hus.HusBoard
+# Timeout: 2000
+# First Move Timeout: 30000
+# Date: Mon Feb 29 19:54:34 EST 2016
+# Player 1: Player-0, 'Human', running on Siegetank
+# Player 2: Player-1, 'RandomHusPlayer', running on Siegetank
+START Player-0 Human
+START Player-1 RandomHusPlayer
+PIT 0 23
+PIT 1 0
+PIT 0 22
+GAMEOVER ILLEGAL MOVE: Player 1 plays pit 0 WINNER 0
+# Game ended: Mon Feb 29 19:54:40 EST 2016

@@ -1,0 +1,31 @@
+# Server version 0.08 running on Siegetank:8123
+# Game ID: 362
+# Board class: hus.HusBoard
+# Timeout: 2000
+# First Move Timeout: 30000
+# Date: Wed Mar 02 01:05:52 EST 2016
+# Player 1: Player-0, 'Brute Force AI', running on Siegetank
+# Player 2: Player-1, '260498154', running on Siegetank
+START Player-0 Brute Force AI
+START Player-1 260498154
+PIT 0 22
+PIT 1 4
+PIT 0 19
+PIT 1 16
+PIT 0 24
+PIT 1 20
+PIT 0 12
+PIT 1 0
+PIT 0 21
+PIT 1 22
+PIT 0 0
+PIT 1 13
+PIT 0 19
+PIT 1 19
+PIT 0 10
+PIT 1 1
+PIT 0 0
+PIT 1 26
+PIT 0 1
+GAMEOVER WINNER 0
+# Game ended: Wed Mar 02 01:05:54 EST 2016

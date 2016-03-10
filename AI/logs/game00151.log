@@ -1,0 +1,10 @@
+# Server version 0.08 running on Siegetank:8123
+# Game ID: 151
+# Board class: hus.HusBoard
+# Timeout: 2000
+# First Move Timeout: 30000
+# Date: Mon Feb 29 20:02:35 EST 2016
+# Player 1: Player-0, 'RandomHusPlayer', running on Siegetank
+# Player 2: Player-1, '260498154', running on Siegetank
+START Player-0 RandomHusPlayer
+START Player-1 260498154

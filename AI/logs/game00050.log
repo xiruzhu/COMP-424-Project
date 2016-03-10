@@ -1,0 +1,28 @@
+# Server version 0.08 running on Siegetank:8123
+# Game ID: 50
+# Board class: hus.HusBoard
+# Timeout: 2000
+# First Move Timeout: 30000
+# Date: Sun Feb 28 23:59:00 EST 2016
+# Player 1: Player-0, 'Human', running on Siegetank
+# Player 2: Player-1, '260498154', running on Siegetank
+START Player-0 Human
+START Player-1 260498154
+PIT 0 9
+PIT 1 1
+PIT 0 21
+PIT 1 10
+PIT 0 7
+PIT 1 20
+PIT 0 3
+PIT 1 14
+PIT 0 18
+PIT 1 18
+PIT 0 13
+PIT 1 16
+PIT 0 22
+PIT 1 0
+PIT 0 0
+PIT 1 0
+GAMEOVER WINNER 1
+# Game ended: Sun Feb 28 23:59:10 EST 2016

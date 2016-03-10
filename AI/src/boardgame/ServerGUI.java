@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -25,6 +26,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
+
+import hus.HusBoardState;
+import hus.HusMove;
 
 
 /** GUI for the server. Can also be run standalone to examine
@@ -540,9 +544,37 @@ implements BoardPanel.BoardPanelListener  {
 
         public void movePlayed(BoardState bs, Move m) {};
         public void gameOver( String msg, BoardState bs) {};
-
+        
+        void print_pits(int[][] pits){
+        	int i;
+        	System.out.println("------------------------------Start----------------------------------");
+        	for(i = 15; i >= 0; i--)
+        		System.out.print(" ( " + pits[0][i] + " )");
+        	System.out.println();
+        	for(i = 16; i < 32; i++)
+        		System.out.print(" ( " + pits[0][i] + " )");
+        	System.out.println("\n------------------------------------------------------------------------");
+        	for(i = 31; i >= 16; i--)
+        		System.out.print(" ( " + pits[1][i] + " )");
+        	System.out.println();
+        	for(i = 0; i < 16; i++)
+        		System.out.print(" ( " + pits[1][i] + " )");
+        	System.out.println("\n------------------------------END---------------------------------------");
+        }
         /* Called by client threads when user input is needed */
         synchronized public Move chooseMove(BoardState bs) {
+        	//So here we tweak to have fun with our person system
+        	/*HusBoardState state = (HusBoardState)bs;
+        	//Print out the values
+        	ArrayList<HusMove> list = state.getLegalMoves();
+        	for(int i = 0; i < list.size(); i++){
+        		HusBoardState cpy = (HusBoardState)state.clone();
+        		cpy.move(list.get(i));
+        		System.out.println("\n!!!!!!! Current Move: " + list.get(i).getPit()+ "!!!!!!!!!!!!!!");
+        		print_pits(cpy.getPits());
+        	}
+        	System.out.println("\n\n\n\n\n");
+            */
             if( moveNeeded ){
                 throw new IllegalStateException("Requested concurrent human moves.");
             }

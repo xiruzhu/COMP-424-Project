@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import hus.HusBoardState;
+import hus.HusMove;
+import student_player.Hash_System;
+import student_player.Hash_Value;
 
 /**
  * Boardgame player client code. Do not modify this class, implement
@@ -26,7 +32,14 @@ public class Client implements Runnable {
     int playerID;
     Board board;
     boolean gameOver = false;
-
+    
+    //Note my own random code.... 
+    //For attempted machine learning
+    //To be removed...
+	ArrayList<int[][]> pits = new ArrayList<int[][]>();
+	ArrayList<Integer> move = new ArrayList<Integer>();
+	Hash_System table = new Hash_System(true);
+	
     private static void printUsage() {
         System.err.println(
             "Usage: java boardgame.Client [playerClass [serverName [serverPort]]]\n" +
@@ -69,8 +82,19 @@ public class Client implements Runnable {
     }
 
     public void run() {
-        if( connect() )
-            clientLoop();
+    	
+        if(connect())
+        	clientLoop();
+        
+        boolean outcome = false;
+        
+        if(((HusBoardState)board.getBoardState()).getWinner() == playerID)
+        	outcome = true;
+        for(int i = 0; i < move.size(); i++){
+        	table.add_move(pits.get(i), move.get(i), playerID, outcome);
+        }
+        table.write_table();
+        System.out.println("Data written in");
     }
 
     /** Process message received from server. */
@@ -117,12 +141,15 @@ public class Client implements Runnable {
 
         try {
             myMove = player.chooseMove( board.getBoardState() );
-
+                    
             if( myMove == null) {
                 System.err.println( "ATTENTION: Player didn't return a move.");
                 throw new Exception();
             }
-
+            
+        	pits.add(((HusBoardState)board.getBoardState()).getPits());
+        	move.add(((HusMove)myMove).getPit());
+        	
             myMove.setPlayerID(playerID);
             myMove.setFromBoard(false);
         } catch( Exception e ) {
