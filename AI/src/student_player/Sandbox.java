@@ -18,6 +18,8 @@ public class Sandbox {
 	HusBoardState simulation;
 	AI learning_AI;
 	AI model_AI;
+	AI random_AI;
+	
 	int learner_id;
 	int model_id;
 	int turns;
@@ -33,7 +35,8 @@ public class Sandbox {
 		learner_id = 0;
 		model_id = 1;
 		learning_AI = new AI(learner_id, model_id);
-		model_AI = new AI(model_id, learner_id);	
+		model_AI = new AI(model_id, learner_id);
+		random_AI = new AI(false, model_id, learner_id);
 		current_weights = learning_AI.weights;
 	}
 	
