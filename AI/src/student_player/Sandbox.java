@@ -12,26 +12,37 @@ import java.util.Hashtable;
 
 import hus.HusBoardState;
 import hus.HusMove;
-import student_player.StudentPlayer.move_value;
 
 public class Sandbox {
+	final int MAX_TURN = 1000;
 	HusBoardState simulation;
 	AI learning_AI;
 	AI model_AI;
 	int learner_id;
 	int model_id;
 	int turns;
-	double[][] optimal_weights;
+	
+	double[][] optimal_weights;	
+	double optimal_eval = 0;
+	
+	double[][] current_weights;
+	double current_eval = 0;
 	
 	public Sandbox(){
 		simulation = new HusBoardState();
 		learner_id = 0;
 		model_id = 1;
 		learning_AI = new AI(learner_id, model_id);
-		model_AI = new AI(model_id, learner_id);
-		int turns = 0;
+		model_AI = new AI(model_id, learner_id);	
+		current_weights = learning_AI.weights;
+	}
+	
+	public void init_set(int random_games, int model_games){
 		
-		for(turns = 0; turns < 300; turns++){
+	}
+	
+	public void play_round(){
+		for(int turns = 0; turns < MAX_TURN; turns++){
 			if(simulation.gameOver()){
 				print_final_state();
 				break;
@@ -43,7 +54,19 @@ public class Sandbox {
 				simulation.move(model_AI.get_move(simulation));
 			}
 		}
-		
+	}
+	
+	public double evaluation_function(int turns, boolean win){
+		//The formula is as follows
+		/*
+		Obj(weights, outcome) = 1000 - 1000/(1 + e^(turn_number/100 - 5)), if win
+				   = 1000 + 1000/(1 + e^(-turn_number/100 + 5)), if lose
+		*/	
+		if(win){
+			return 1000 - 1000/(1 + Math.pow(Math.E, (double)turns/100.0 - 5.0));
+		}else{
+			return 1000 + 1000/(1 + Math.pow(Math.E, (double)turns/100.0 - 5.0));
+		}
 	}
 	
 	void print_final_state(){
@@ -78,6 +101,7 @@ public class Sandbox {
 			 this.player_id = player_id;
 			 this.opponent_id = opponent_id;
 			 this.weights = new double[2][32];
+			 this.learner = true;
 			 for(int i = 0; i < this.weights.length; i++){
 				 this.weights[0][player_id] = 1; 
 				 this.weights[0][player_id] = 0;
@@ -128,7 +152,19 @@ public class Sandbox {
 	}
 		
 		HusMove get_move(HusBoardState state){
-			return init_traverse(state)[0].move;
+			if(learner){
+					ArrayList<HusMove> moves = new ArrayList<HusMove>();
+					move_value[] result =  init_traverse(state);
+					for(int i = 0; i < result.length; i++){
+						if(result[i].value == result[0].value)
+							moves.add(result[i].move);
+					}
+					return moves.get( (int)(Math.random() * moves.size()) );
+				}
+			else{
+				ArrayList<HusMove> list = state.getLegalMoves();
+				return list.get( (int)(Math.random() * list.size()) );
+			}
 		}
 		
 		double heuristic(int[][] pits){
